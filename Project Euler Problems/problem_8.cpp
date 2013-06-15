@@ -6,6 +6,9 @@ using namespace std;
 
 /*
 *	Find the greatest product of five consecutive digits in the 1000-digit number.
+* 	
+*	This solution runs in O(n) and is flexible enough to handle any length number (i.e. I don't make
+* 	assumptions that there are 1000 digits, etc.)
 */
 
 int main() {
@@ -13,21 +16,30 @@ int main() {
 					
 	int product = 1;
 	int max = 0;
-	int digits_seen = 0;
+	int digit_counter = 0;
 	
 	for(int num_index = 0; num_index < num.length(); num_index++) {
 		int digit = (num[num_index] - '0');
-		digits_seen += 1;
+		digit_counter += 1;
 		
 		if(digit == 0) {
+			digit_counter = 0;
 			product = 1;
 		} else {
-			product *= digit;
-			if(product > max) {
-				max = product;
+			if(digit_counter >= 5) {
+				int previous_starting_digit = (num[num_index - 5] - '0');
+				if(previous_starting_digit == 0) {
+					product *= digit;
+				} else {
+					product =  (product / previous_starting_digit) * digit;
+				}
+					
+				if(product > max) {
+					max = product;
+				}
+			} else {
+				product *= digit;
 			}
-				
-			product /= (num[num_index - 5] - '0');
 		}
 	}
 	
