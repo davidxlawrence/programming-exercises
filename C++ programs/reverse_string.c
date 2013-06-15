@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
  
+/* Reverses a string in place */
 void reverse(char *string){
     int end = strlen(string) - 1;
     int beginning = 0;

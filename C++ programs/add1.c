@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+/* Add 1 to a value without using arithmetic operators */
 int add1(int val) {
     int num = 1;
     while (val != 0)
